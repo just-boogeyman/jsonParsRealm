@@ -74,7 +74,11 @@ class APICaller {
         for urlImage in images {
 //            print(image)
             obtainImage(urlImage: urlImage) { [weak self] (image) in
-                self?.cachedDataSourse.setObject(image!, forKey: index as AnyObject)
+                if let image = image {
+                    self?.cachedDataSourse.setObject(image, forKey: index as AnyObject)
+                } else {
+                    return print("error")
+                }
             }
         }
     }

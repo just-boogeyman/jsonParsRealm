@@ -71,7 +71,7 @@ class APICaller {
     
     // обновление кэша
     func upDateCache(images: [String]) {
-        for urlImage in images {
+        for (index, urlImage) in images.enumerated() {
 //            print(image)
             obtainImage(urlImage: urlImage) { [weak self] (image) in
                 if let image = image {

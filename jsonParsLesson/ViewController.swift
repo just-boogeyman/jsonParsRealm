@@ -28,7 +28,6 @@ class ViewController: UIViewController {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        
     }
     
     override func viewDidLayoutSubviews() {

@@ -6,13 +6,17 @@
 //
 
 import UIKit
+import SnapKit
+import Then
+
+
 
 class ViewController: UIViewController {
     
     private let apiCaller = APICaller()
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TableViewCell2.self, forCellReuseIdentifier: "idCell")
         return tableView
     }()
     
@@ -70,8 +74,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return self.apiCaller.nameArrey.count
     }
     
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Manager.name = apiCaller.nameArrey[indexPath.row]
+        Manager.status = ""
+        Manager.numberImage = indexPath.row
+        performSegue(withIdentifier: "nextVC", sender: tableView.cellForRow(at: indexPath))    }
+
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "idCell", for: indexPath) as! TableViewCell2
         
         if indexPath.row == self.apiCaller.nameArrey.count-1 {
             apiCaller.fetchData(urlString: nextStr, completion: { [weak self] result in
@@ -97,8 +110,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             })
         }
 
-        cell.textLabel?.text = self.apiCaller.nameArrey[indexPath.row]
-        cell.imageView?.image = self.apiCaller.cachedDataSourse.object(forKey: indexPath.row as AnyObject)
+        cell.nameLable.text = "wqe"
+        cell.imageRM.image = self.apiCaller.cachedDataSourse.object(forKey: indexPath.row as AnyObject)
+//        cell.textLabel?.text = self.apiCaller.nameArrey[indexPath.row]
+//        cell.imageView?.image = self.apiCaller.cachedDataSourse.object(forKey: indexPath.row as AnyObject)
 
         return cell
     }

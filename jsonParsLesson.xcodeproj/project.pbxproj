@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044A65F0279EE7A60097165A /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A65EF279EE7A60097165A /* NextViewController.swift */; };
+		044A65F627A1A2A90097165A /* TableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A65F527A1A2A90097165A /* TableViewCell2.swift */; };
 		049386B12799BB2A009AEBA5 /* RealmJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049386B02799BB2A009AEBA5 /* RealmJson.swift */; };
 		0496BB052764CACD00C3DC68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496BB042764CACD00C3DC68 /* AppDelegate.swift */; };
 		0496BB072764CACD00C3DC68 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496BB062764CACD00C3DC68 /* SceneDelegate.swift */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		044A65EF279EE7A60097165A /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
+		044A65F527A1A2A90097165A /* TableViewCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell2.swift; sourceTree = "<group>"; };
 		049386B02799BB2A009AEBA5 /* RealmJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmJson.swift; sourceTree = "<group>"; };
 		0496BB012764CACD00C3DC68 /* jsonParsLesson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jsonParsLesson.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0496BB042764CACD00C3DC68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				0496BB342764CB8D00C3DC68 /* APICaller.swift */,
 				0496BB362764CB9B00C3DC68 /* Model.swift */,
 				049386B02799BB2A009AEBA5 /* RealmJson.swift */,
+				044A65EF279EE7A60097165A /* NextViewController.swift */,
+				044A65F527A1A2A90097165A /* TableViewCell2.swift */,
 			);
 			path = jsonParsLesson;
 			sourceTree = "<group>";
@@ -415,7 +421,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044A65F627A1A2A90097165A /* TableViewCell2.swift in Sources */,
 				0496BB372764CB9B00C3DC68 /* Model.swift in Sources */,
+				044A65F0279EE7A60097165A /* NextViewController.swift in Sources */,
 				0496BB092764CACD00C3DC68 /* ViewController.swift in Sources */,
 				0496BB052764CACD00C3DC68 /* AppDelegate.swift in Sources */,
 				049386B12799BB2A009AEBA5 /* RealmJson.swift in Sources */,

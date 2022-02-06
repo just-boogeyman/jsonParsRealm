@@ -20,12 +20,7 @@ class ViewController: UIViewController {
         return tableView
     }()
     
-    private var totalArrey = [Persona]()
- 
-    var lessons: Lesson? = nil
-    var arreyCount: Int = 0
-    let urlString = "https://rickandmortyapi.com/api/character"
-    var nextStr: String = ""
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,19 +32,13 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
-        apiCaller.fetchData(urlString: urlString, completion: { [weak self] result in
+        apiCaller.fetchData(urlString: apiCaller.urlString, completion: { [weak self] result in
             switch result {
             case .success(let lesson):
-                self?.lessons = lesson
-                self?.nextStr = lesson.info.next
+                self?.apiCaller.lessons = lesson
+                self?.apiCaller.nextStr = lesson.info.next
                 for value in lesson.results {
-                    self?.apiCaller.nameArrey.append(value.name)
-                    self?.apiCaller.imageArray.append(value.image)
-                }
-                
-                DispatchQueue.main.async {
-                    self?.apiCaller.addArray()
-                    self?.apiCaller.upDateCache(images: self!.apiCaller.imageArray)
+                    self?.apiCaller.totalArrey.append(value)
                 }
                 
                 DispatchQueue.main.async {
@@ -71,49 +60,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.apiCaller.nameArrey.count
+        return apiCaller.totalArrey.count
     }
     
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Manager.name = apiCaller.nameArrey[indexPath.row]
-        Manager.status = ""
+        
         Manager.numberImage = indexPath.row
-        performSegue(withIdentifier: "nextVC", sender: tableView.cellForRow(at: indexPath))    }
+        performSegue(withIdentifier: "nextVC", sender: tableView.cellForRow(at: indexPath))
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+
+        guard segue.identifier == "nextVC" else { return }
+        guard let nextController = segue.destination as? NextViewController else { return }
+        nextController.initNVC(item: apiCaller.totalArrey[Manager.numberImage])
+
+
+    }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "idCell", for: indexPath) as! TableViewCell2
         
-        if indexPath.row == self.apiCaller.nameArrey.count-1 {
-            apiCaller.fetchData(urlString: nextStr, completion: { [weak self] result in
-                switch result {
-                case .success(let lesson):
-                    self?.lessons = lesson
-                    self?.nextStr = lesson.info.next
-                    for value in lesson.results {
-                        self?.apiCaller.nameArrey.append(value.name)
-                        self?.apiCaller.imageArray.append(value.image)
-                    }
-                    DispatchQueue.main.async {
-                        self?.apiCaller.addArray()
-                        self?.apiCaller.upDateCache(images: self!.apiCaller.imageArray)
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self?.tableView.reloadData()
-                    }
-                case .failure(_):
-                    break
-                }
-            })
-        }
+        Manager.numberCell = indexPath.row
 
-        cell.nameLable.text = "wqe"
-        cell.imageRM.image = self.apiCaller.cachedDataSourse.object(forKey: indexPath.row as AnyObject)
-//        cell.textLabel?.text = self.apiCaller.nameArrey[indexPath.row]
-//        cell.imageView?.image = self.apiCaller.cachedDataSourse.object(forKey: indexPath.row as AnyObject)
+        cell.initCell(item: apiCaller.totalArrey[indexPath.row], index: indexPath.row)
 
         return cell
     }

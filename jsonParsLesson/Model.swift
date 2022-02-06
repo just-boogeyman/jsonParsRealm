@@ -22,11 +22,16 @@ struct Persona: Decodable {
     var status: String
     var image: String
     var species: String
+    var location: Location
 }
 
 
 
 struct Info: Decodable {
     var next: String
+}
+
+struct Location: Decodable {
+    var name: String
 }
 
